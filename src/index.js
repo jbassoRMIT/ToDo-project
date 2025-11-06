@@ -1,7 +1,7 @@
 //import styles 
 import "./styles.css";
 import { displayTodo } from "./renderTodoList.js";
-
+import { addNewTodo } from "./addNewTodo.js";
 //import greeting to test
 import {greeting} from "./greeting.js";
 
@@ -11,6 +11,9 @@ console.log("hello world!");
 
 //call displayTodo function
 displayTodo();
+
+//call addNewTodo function
+addNewTodo();
 
 
 
