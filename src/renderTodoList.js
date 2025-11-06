@@ -1,6 +1,9 @@
 //import toDo class
 import { ToDo } from "./toDo.js";
 
+//import removeChildren function from helper file
+import { removeChildren } from "./helperFunctions.js";
+
 //test object creation
 const task1=new ToDo("water plants","get the house out and water the garden","10/11/25","high");
 const task2=new ToDo("laundry","wash clothes","12/11/25","medium");
@@ -21,6 +24,23 @@ const displayTodo=function(){
     for(let task of tasks){
         const taskInfo=document.createElement("li");
         taskInfo.textContent=`task: ${task.description}, due: ${task.dueDate}`;
+
+        //add class info for conditional formatting based on priority
+        if(task.priority=="high"){
+            taskInfo.classList.add("highPriority");
+            taskInfo.classList.remove("mediumPrioity");
+            taskInfo.classList.remove("lowPrioity");
+        }
+        else if(task.priority=="medium"){
+            taskInfo.classList.add("mediumPriority");
+            taskInfo.classList.remove("highPriority");
+            taskInfo.classList.remove("lowPriority");
+        }
+        else if(task.priority=="low"){
+            taskInfo.classList.add("lowPriority");
+            taskInfo.classList.remove("highPriority");
+            taskInfo.classList.remove("mediumPriority");
+        }
         displayTodoList.appendChild(taskInfo);
     }
     
