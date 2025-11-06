@@ -1,3 +1,11 @@
+//import styles 
+import "./styles.css";
+
+//import greeting to test
+import {greeting} from "./greeting.js";
+
+console.log(greeting);
+
 console.log("hello world!");
 
 
