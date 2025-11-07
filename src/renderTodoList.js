@@ -14,10 +14,25 @@ const displayTodo=function(){
     //clear contents of displayTodo div
     removeChildren(displayTodo);
 
-    //create ul inside display div
-    const displayTodoList=document.createElement("ul");
+    //create table inside display div
+    const displayTodoTable=document.createElement("table");
+    const tableHeaderRow=document.createElement("tr");
+    const titleHeader=document.createElement("th");
+    titleHeader.textContent="title";
+    const descriptionHeader=document.createElement("th");
+    descriptionHeader.textContent="Description";
+    const dateHeader=document.createElement("th");
+    dateHeader.textContent="Due date";
+    const priorityHeader=document.createElement("th");
+    priorityHeader.textContent="Priority";
 
-    displayTodo.appendChild(displayTodoList);
+    displayTodo.appendChild(displayTodoTable);
+    displayTodoTable.appendChild(tableHeaderRow);
+    tableHeaderRow.appendChild(titleHeader);
+    tableHeaderRow.appendChild(descriptionHeader);
+    tableHeaderRow.appendChild(dateHeader)
+    tableHeaderRow.appendChild(priorityHeader);
+
     
     //iterate over tasks, creating an li  element and appending to div
     for(let task of tasks){
