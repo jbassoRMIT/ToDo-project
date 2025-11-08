@@ -25,6 +25,8 @@ const displayTodo=function(){
     dateHeader.textContent="Due date";
     const priorityHeader=document.createElement("th");
     priorityHeader.textContent="Priority";
+    const isCompletedHeader=document.createElement("th");
+    isCompletedHeader.textContent="Completed?";
 
     displayTodo.appendChild(displayTodoTable);
     displayTodoTable.appendChild(tableHeaderRow);
@@ -32,12 +34,34 @@ const displayTodo=function(){
     tableHeaderRow.appendChild(descriptionHeader);
     tableHeaderRow.appendChild(dateHeader)
     tableHeaderRow.appendChild(priorityHeader);
+    tableHeaderRow.appendChild(isCompletedHeader);
 
     
     //iterate over tasks, creating an li  element and appending to div
     for(let task of tasks){
-        const taskInfo=document.createElement("li");
-        taskInfo.textContent=`task: ${task.description}, due: ${task.dueDate}`;
+        //create a row for each task
+        const taskInfo=document.createElement("tr");
+
+        //create a td for each data field
+        const taskTitle=document.createElement("td");
+        taskTitle.textContent=task.title;
+        const taskDescription=document.createElement("td");
+        taskDescription.textContent=task.description;
+        const taskDue=document.createElement("td");
+        taskDue.textContent=task.dueDate;
+        const taskPriority=document.createElement("td");
+        taskPriority.textContent=task.priority;
+        const taskIsCompleted=document.createElement("td");
+        const isCompletedImage=document.createElement("img");
+        // if(task.isCompleted){
+        //     isCompletedImage.src=
+        // }
+
+        //append all the td's to the tr
+        taskInfo.appendChild(taskTitle);
+        taskInfo.appendChild(taskDescription);
+        taskInfo.appendChild(taskDue);
+        taskInfo.appendChild(taskPriority);
 
         //add class info for conditional formatting based on priority
         if(task.priority=="High"){
@@ -55,7 +79,9 @@ const displayTodo=function(){
             taskInfo.classList.remove("highPriority");
             taskInfo.classList.remove("mediumPriority");
         }
-        displayTodoList.appendChild(taskInfo);
+
+        //append tr to table
+        displayTodoTable.appendChild(taskInfo);
     }
     
 }

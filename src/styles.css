@@ -3,13 +3,17 @@ h1{
 }
 
 .highPriority{
-    color: red;
+    background-color: rgb(255, 108, 108);
 }
 
 .mediumPriority{
-    color: rgb(255, 230, 0);
+    background-color: rgb(253, 240, 123);
 }
 
 .lowPriority{
-    color: green;
+    background-color: rgb(118, 176, 118);
+}
+
+th,td {
+    border: 1px solid black;
 }
