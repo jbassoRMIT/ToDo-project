@@ -4,12 +4,19 @@ import { ToDo } from "./toDo.js";
 //import removeChildren function from helper file
 import { removeChildren } from "./helperFunctions.js";
 
+//import toggleCompleted function
+import { toggleCompletedStatus } from "./toggleCompleted.js";
+
+//import deleteTodo function
+import { deleteTodo } from "./deleteTodo.js";
+
 //import tasks array
 import { tasks } from "./todoArray.js";
 
 //import the images
 import check from "./check.svg";
 import cross from "./cross.svg";
+import deleteSymbol from "./delete.svg";
 
 //try and move display to Do function to its own function
 const displayTodo=function(){
@@ -21,6 +28,8 @@ const displayTodo=function(){
     //create table inside display div
     const displayTodoTable=document.createElement("table");
     const tableHeaderRow=document.createElement("tr");
+    const idHeader=document.createElement("th");
+    idHeader.textContent="ID"
     const titleHeader=document.createElement("th");
     titleHeader.textContent="title";
     const descriptionHeader=document.createElement("th");
@@ -36,6 +45,7 @@ const displayTodo=function(){
 
     displayTodo.appendChild(displayTodoTable);
     displayTodoTable.appendChild(tableHeaderRow);
+    tableHeaderRow.appendChild(idHeader);
     tableHeaderRow.appendChild(titleHeader);
     tableHeaderRow.appendChild(descriptionHeader);
     tableHeaderRow.appendChild(dateHeader)
@@ -46,10 +56,13 @@ const displayTodo=function(){
     
     //iterate over tasks, creating an li  element and appending to div
     for(let task of tasks){
-        //create a row for each task
+        //create a row for each task, giving it id==uuid
         const taskInfo=document.createElement("tr");
+        taskInfo.id=task.id;
 
         //create a td for each data field
+        const taskId=document.createElement("td");
+        taskId.textContent=task.id;
         const taskTitle=document.createElement("td");
         taskTitle.textContent=task.title;
         const taskDescription=document.createElement("td");
@@ -76,24 +89,29 @@ const displayTodo=function(){
 
         //add event listener to the toggle button, that swaps values of completed status
         toggleCompletedButton.addEventListener("click",()=>{
-            task.isCompleted=!task.isCompleted;
-            if(task.isCompleted){
-                isCompletedImage.src=check;
-                taskInfo.classList.add("completed");
-            }
-            else{
-                isCompletedImage.src=cross;
-                taskInfo.classList.remove("completed");
-            }
+            toggleCompletedStatus(task,isCompletedImage,taskInfo);
+        })
+
+        //add a column with delete functionality to delete a todo
+        const deleteTask=document.createElement("td");
+        const deleteIcon=document.createElement("img");
+        deleteIcon.src=deleteSymbol;
+        deleteTask.appendChild(deleteIcon);
+
+        //add event listener to the delete image
+        deleteIcon.addEventListener("click",()=>{
+            deleteTodo(tasks,task,taskInfo);
         })
 
         //append all the td's to the tr
+        taskInfo.appendChild(taskId);
         taskInfo.appendChild(taskTitle);
         taskInfo.appendChild(taskDescription);
         taskInfo.appendChild(taskDue);
         taskInfo.appendChild(taskPriority);
         taskInfo.appendChild(taskIsCompleted);
         taskInfo.appendChild(toggleCompleted);
+        taskInfo.appendChild(deleteTask);
 
         //add class info for conditional formatting based on priority
         if(task.priority=="High"){
