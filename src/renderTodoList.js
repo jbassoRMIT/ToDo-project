@@ -31,6 +31,8 @@ const displayTodo=function(){
     priorityHeader.textContent="Priority";
     const isCompletedHeader=document.createElement("th");
     isCompletedHeader.textContent="Completed?";
+    const toggleTodoHeader=document.createElement("th");
+    toggleTodoHeader.textContent="Toggle completed";
 
     displayTodo.appendChild(displayTodoTable);
     displayTodoTable.appendChild(tableHeaderRow);
@@ -39,6 +41,7 @@ const displayTodo=function(){
     tableHeaderRow.appendChild(dateHeader)
     tableHeaderRow.appendChild(priorityHeader);
     tableHeaderRow.appendChild(isCompletedHeader);
+    tableHeaderRow.appendChild(toggleTodoHeader);
 
     
     //iterate over tasks, creating an li  element and appending to div
@@ -63,10 +66,26 @@ const displayTodo=function(){
         }
         else{
             isCompletedImage.src=cross;
+            taskInfo.classList.remove("completed");
         }
         taskIsCompleted.appendChild(isCompletedImage);
+        const toggleCompleted=document.createElement("td");
+        const toggleCompletedButton=document.createElement("button");
+        toggleCompletedButton.textContent="toggle completed status";
+        toggleCompleted.appendChild(toggleCompletedButton);
 
-        //Also create a td with a button inside to toggle completed status
+        //add event listener to the toggle button, that swaps values of completed status
+        toggleCompletedButton.addEventListener("click",()=>{
+            task.isCompleted=!task.isCompleted;
+            if(task.isCompleted){
+                isCompletedImage.src=check;
+                taskInfo.classList.add("completed");
+            }
+            else{
+                isCompletedImage.src=cross;
+                taskInfo.classList.remove("completed");
+            }
+        })
 
         //append all the td's to the tr
         taskInfo.appendChild(taskTitle);
@@ -74,6 +93,7 @@ const displayTodo=function(){
         taskInfo.appendChild(taskDue);
         taskInfo.appendChild(taskPriority);
         taskInfo.appendChild(taskIsCompleted);
+        taskInfo.appendChild(toggleCompleted);
 
         //add class info for conditional formatting based on priority
         if(task.priority=="High"){
