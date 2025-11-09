@@ -7,6 +7,10 @@ import { removeChildren } from "./helperFunctions.js";
 //import tasks array
 import { tasks } from "./todoArray.js";
 
+//import the images
+import check from "./check.svg";
+import cross from "./cross.svg";
+
 //try and move display to Do function to its own function
 const displayTodo=function(){
     const displayTodo=document.querySelector(".displayTodo");
@@ -53,15 +57,23 @@ const displayTodo=function(){
         taskPriority.textContent=task.priority;
         const taskIsCompleted=document.createElement("td");
         const isCompletedImage=document.createElement("img");
-        // if(task.isCompleted){
-        //     isCompletedImage.src=
-        // }
+        if(task.isCompleted){
+            isCompletedImage.src=check;
+            taskInfo.classList.add("completed");
+        }
+        else{
+            isCompletedImage.src=cross;
+        }
+        taskIsCompleted.appendChild(isCompletedImage);
+
+        //Also create a td with a button inside to toggle completed status
 
         //append all the td's to the tr
         taskInfo.appendChild(taskTitle);
         taskInfo.appendChild(taskDescription);
         taskInfo.appendChild(taskDue);
         taskInfo.appendChild(taskPriority);
+        taskInfo.appendChild(taskIsCompleted);
 
         //add class info for conditional formatting based on priority
         if(task.priority=="High"){

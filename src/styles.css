@@ -17,3 +17,7 @@ h1{
 th,td {
     border: 1px solid black;
 }
+
+.completed{
+    text-decoration: line-through;
+}
