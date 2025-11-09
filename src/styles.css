@@ -1,5 +1,6 @@
 h1{
     color: green;
+    font-family: "Playwrite HU";
 }
 
 .highPriority{
@@ -16,8 +17,19 @@ h1{
 
 th,td {
     border: 1px solid black;
+    font-family: "Roboto";
 }
 
 .completed{
     text-decoration: line-through;
+}
+
+th {
+    background-color: aqua;
+}
+
+.newToDo {
+    border: 1px solid black;
+    padding: 3px;
+    margin-top: 10px;
 }
